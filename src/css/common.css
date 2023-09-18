@@ -16,3 +16,25 @@ img {
   display: block;
   max-width: 100%;
 }
+
+/* TASK 2 CSS */
+
+.timer {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.value {
+  font-size: larger;
+}
+
+.label {
+  font-size: small;
+}
