@@ -31,19 +31,6 @@ btnStartRef.setAttribute('disabled', true);
 flatpickr(imputDatePickerRef, options);
 
 btnStartRef.addEventListener('click', onBtnStart);
-window.addEventListener('keydown', e => {
-  if (e.code === 'Escape' && timerId) {
-    clearInterval(timerId);
-
-    imputDatePickerRef.removeAttribute('disabled');
-    btnStartRef.setAttribute('disabled', true);
-
-    secondsRef.textContent = '00';
-    minutesRef.textContent = '00';
-    hoursRef.textContent = '00';
-    daysRef.textContent = '00';
-  }
-});
 
 function onBtnStart() {
   timerId = setInterval(startTimer, 1000);

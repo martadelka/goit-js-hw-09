@@ -10,16 +10,20 @@ let timerId = 0;
 buttonOn.addEventListener('click', onStart);
 buttonOff.addEventListener('click', onStop);
 
+buttonOff.toggleAttribute('disabled');
+
 function onStart() {
   timerId = setInterval(getBgColor, 1000);
 
   buttonOn.toggleAttribute('disabled');
+  buttonOff.removeAttribute('disabled');
 }
 
 function onStop() {
   clearInterval(timerId);
 
   buttonOn.removeAttribute('disabled');
+  buttonOff.toggleAttribute('disabled');
 }
 
 function getBgColor() {
