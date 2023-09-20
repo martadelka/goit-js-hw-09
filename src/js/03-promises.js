@@ -7,7 +7,6 @@ form.addEventListener('submit', onSubmitForm);
 
 function onSubmitForm(e) {
   e.preventDefault();
-  buttonSubmit.toggleAttribute('disabled');
 
   let delay = Number(form.delay.value);
 
@@ -21,6 +20,8 @@ function onSubmitForm(e) {
       });
     delay += Number(form.step.value);
   }
+
+  form.reset()
 }
 
 function createPromise(position, delay) {
