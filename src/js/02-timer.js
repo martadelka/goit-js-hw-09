@@ -11,9 +11,9 @@ const dataMinutes = document.querySelector('[data-minutes]');
 const dataSeconds = document.querySelector('[data-seconds]');
 const SECOND_DELAY = 1000;
 
-let selectedDate = null;
-let currentDate = null;
-let timerId = null;
+let selectedDate = 0;
+let currentDate = 0;
+let timerId = 0;
 startBtn.disabled = true;
 
 
