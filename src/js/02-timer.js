@@ -1,6 +1,6 @@
-import { Report } from 'notiflix/build/notiflix-report-aio';
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
 
 const startBtn = document.querySelector('[data-start]');
 const inputCalendar = document.querySelector('input#datetime-picker');
@@ -23,17 +23,8 @@ const options = {
     onClose(selectedDates) {
       if(selectedDates[0].getTime() < Date.now()) {
         // alert("Please choose a date in the future");
-        Report.failure(
-            'Oops!',
-            'Please choose a date in the future.',
-            'Okay',
-            );
+        Notiflix.Notify.failure('Please choose a date in the future!');
       } else {
-        Report.success(
-            'Super!',
-            'Please, click on button start.',
-            'Okay',
-            );
         startBtn.disabled = false;
         selectedDate = selectedDates[0].getTime();
       }
@@ -51,12 +42,8 @@ const counter = {
             convertMs(delta);
             updateInterfaceTimer(convertMs(delta));
             if (delta <= 1000) {
-                this.stop();
-                Report.info(
-                    'Time is over',
-                    'You can choose a new date and time',
-                    'Okay',
-                    );
+              this.stop();
+              Notiflix.Notify.info('Time is over');
             }
         }, SECOND_DELAY);
     }, 
