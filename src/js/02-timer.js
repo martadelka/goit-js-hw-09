@@ -1,7 +1,6 @@
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-import convertMs from './dateConvert';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const startBtn = document.querySelector('[data-start]');
 const inputCalendar = document.querySelector('input#datetime-picker');
@@ -11,11 +10,10 @@ const dataMinutes = document.querySelector('[data-minutes]');
 const dataSeconds = document.querySelector('[data-seconds]');
 const SECOND_DELAY = 1000;
 
-let selectedDate = 0;
-let currentDate = 0;
-let timerId = 0;
+let selectedDate = null;
+let currentDate = null;
+let timerId = null;
 startBtn.disabled = true;
-
 
 const options = {
     enableTime: true,
@@ -24,8 +22,18 @@ const options = {
     minuteIncrement: 1,
     onClose(selectedDates) {
       if(selectedDates[0].getTime() < Date.now()) {
-        Notify.failure('Choose a date in the future')
+        // alert("Please choose a date in the future");
+        Report.failure(
+            'Oops!',
+            'Please choose a date in the future.',
+            'Okay',
+            );
       } else {
+        Report.success(
+            'Super!',
+            'Please, click on button start.',
+            'Okay',
+            );
         startBtn.disabled = false;
         selectedDate = selectedDates[0].getTime();
       }
@@ -43,8 +51,12 @@ const counter = {
             convertMs(delta);
             updateInterfaceTimer(convertMs(delta));
             if (delta <= 1000) {
-              this.stop();
-              Notify.info('Time is over');
+                this.stop();
+                Report.info(
+                    'Time is over',
+                    'You can choose a new date and time',
+                    'Okay',
+                    );
             }
         }, SECOND_DELAY);
     }, 
@@ -77,10 +89,15 @@ function convertMs(ms) {
     const hour = minute * 60;
     const day = hour * 24;
   
+    // Remaining days
     const days = Math.floor(ms / day);
+    // Remaining hours
     const hours = Math.floor((ms % day) / hour);
+    // Remaining minutes
     const minutes = Math.floor(((ms % day) % hour) / minute);
+    // Remaining seconds
     const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   
     return { days, hours, minutes, seconds };
   }
+ 
